@@ -1,5 +1,16 @@
+import authService from '~/services/auth.service.js'
+import { Request, Response, NextFunction } from 'express'
+import { RegisterDTO } from '~/types/auth.type.js'
+
 class AuthController {
-  async signUp(req, res, next) {}
+  async signUp(req: Request, res: Response, next: NextFunction) {
+    try {
+      const user = await authService.register(req.body as RegisterDTO)
+      res.status(201).json({ message: 'User created successful', user })
+    } catch (error) {
+      next(error)
+    }
+  }
 }
 
 export default new AuthController()

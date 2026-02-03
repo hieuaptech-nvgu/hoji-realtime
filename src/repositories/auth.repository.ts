@@ -10,6 +10,12 @@ class AuthRepository {
     return User.findOne({ username })
   }
 
+  findByEmailOrUsername(email: string, username: string) {
+    return User.findOne({
+      $or: [{ email }, { username }],
+    })
+  }
+
   findById(id: string) {
     return User.findById(id)
   }
