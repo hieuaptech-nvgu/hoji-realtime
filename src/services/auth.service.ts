@@ -3,7 +3,7 @@ import JwtUtils from '../utils/jwt.js'
 import HashUtils from '../utils/hash.js'
 import { AppError } from '~/utils/error.js'
 
-import { RegisterDTO, LoginDTO } from '~/types/auth.type.js'
+import { RegisterDTO, LoginDTO } from '../dtos/auth.dto.js'
 
 class AuthService {
   async register(data: RegisterDTO) {

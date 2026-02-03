@@ -1,6 +1,6 @@
 import authService from '~/services/auth.service.js'
 import { Request, Response, NextFunction } from 'express'
-import { RegisterDTO } from '~/types/auth.type.js'
+import { RegisterDTO } from '../dtos/auth.dto.js'
 
 class AuthController {
   async signUp(req: Request, res: Response, next: NextFunction) {
