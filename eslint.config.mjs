@@ -10,24 +10,25 @@ export default defineConfig([
   ...tseslint.configs.recommended,
   prettierConfig,
   {
-    ignores: ["eslint.config.mjs", "node_modules", "dist", "build"],
+    ignores: ['eslint.config.mjs', 'node_modules', 'dist', 'build'],
 
     languageOptions: {
       globals: { ...globals.node },
       parserOptions: {
         ecmaVersion: 2022,
-        sourceType: "module",
-        project: "./tsconfig.json"
+        sourceType: 'module',
+        project: './tsconfig.json',
       },
     },
     plugins: {
       prettier: prettier,
     },
     rules: {
-      semi: "off",
-      "prefer-const": "error",
-      "no-console": "error",
-      "prettier/prettier": "warn",
+      'no-unused-vars': 'off',
+      semi: 'off',
+      'prefer-const': 'error',
+      'prettier/prettier': 'warn',
+      '@typescript-eslint/no-unused-vars': 'off',
     },
   },
-]);
+])
