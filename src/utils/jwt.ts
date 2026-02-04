@@ -1,8 +1,6 @@
 import jwt from 'jsonwebtoken'
 import { AccessTokenPayload, RefreshTokenPayload } from '~/types/jwt.type.js'
-
-const ACCESS_EXPIRES_IN = '3m'
-const REFRESH_EXPIRES_IN = '7d'
+import { JWT_CONFIG } from '~/libs/config.js'
 
 class JwtUtils {
   private getAccessKey(): string {
@@ -21,13 +19,13 @@ class JwtUtils {
 
   createAccessToken(payload: AccessTokenPayload) {
     return jwt.sign(payload, this.getAccessKey(), {
-      expiresIn: ACCESS_EXPIRES_IN,
+      expiresIn: JWT_CONFIG.ACCESS_EXPIRES,
     })
   }
 
   createRefreshToken(payload: RefreshTokenPayload) {
     return jwt.sign(payload, this.getRefreshKey(), {
-      expiresIn: REFRESH_EXPIRES_IN,
+      expiresIn: JWT_CONFIG.REFRESH_EXPIRES,
     })
   }
 

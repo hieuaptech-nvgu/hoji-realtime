@@ -25,7 +25,7 @@ export default defineConfig([
     },
     rules: {
       'no-unused-vars': 'off',
-      semi: 'off',
+      'semi': 'off',
       'prefer-const': 'error',
       'prettier/prettier': 'warn',
       '@typescript-eslint/no-unused-vars': 'off',
