@@ -3,5 +3,6 @@ const router = express.Router()
 import userController from '~/controllers/user.controller.js'
 
 router.get('/me', userController.authMe)
+router.get('/test', userController.test)
 
 export default router

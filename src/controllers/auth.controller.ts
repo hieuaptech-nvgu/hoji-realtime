@@ -1,8 +1,10 @@
 import authService from '~/services/auth.service.js'
 import { Request, Response, NextFunction } from 'express'
 import { RegisterDTO, LoginDTO } from '../dtos/auth.dto.js'
-import { REFRESH_TOKEN_TTL } from '~/libs/tokens.js'
 import sessionService from '~/services/session.service.js'
+import { REFRESH_TOKEN_TTL } from '~/libs/tokens.js'
+import ms from 'ms'
+
 
 class AuthController {
   async signUp(req: Request, res: Response, next: NextFunction) {
@@ -22,7 +24,7 @@ class AuthController {
         httpOnly: true,
         secure: true,
         sameSite: 'none',
-        maxAge: REFRESH_TOKEN_TTL,
+        maxAge: ms(REFRESH_TOKEN_TTL),
       })
 
       res.status(200).json({ message: `User ${user.displayName} is logged in`, accessToken })
@@ -38,7 +40,20 @@ class AuthController {
         await sessionService.logout(token)
         res.clearCookie('refreshToken')
       }
-      return res.status(204)
+      res.sendStatus(204)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async refreshToken(req: Request, res: Response, next: NextFunction) {
+    try {
+      const token = req.cookies?.refreshToken
+      if (!token) {
+        return res.status(401).json({ message: 'Token not found' })
+      }
+      const accessToken = await sessionService.refreshToken(token)
+      res.status(200).json({ accessToken })
     } catch (error) {
       next(error)
     }

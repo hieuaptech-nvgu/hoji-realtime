@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import { AccessTokenPayload, RefreshTokenPayload } from '~/types/jwt.type.js'
-import { JWT_CONFIG } from '~/libs/config.js'
+import {ACCESS_TOKEN_TTL, REFRESH_TOKEN_TTL} from '../libs/tokens.js'
 
 class JwtUtils {
   private getAccessKey(): string {
@@ -19,13 +19,13 @@ class JwtUtils {
 
   createAccessToken(payload: AccessTokenPayload) {
     return jwt.sign(payload, this.getAccessKey(), {
-      expiresIn: JWT_CONFIG.ACCESS_EXPIRES,
+      expiresIn: ACCESS_TOKEN_TTL,
     })
   }
 
   createRefreshToken(payload: RefreshTokenPayload) {
     return jwt.sign(payload, this.getRefreshKey(), {
-      expiresIn: JWT_CONFIG.REFRESH_EXPIRES,
+      expiresIn: REFRESH_TOKEN_TTL,
     })
   }
 

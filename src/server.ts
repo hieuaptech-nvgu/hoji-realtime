@@ -8,6 +8,7 @@ import userRoute from './routes/user.route.js'
 import { errorHandler } from './middlewares/errorHandler.js'
 import cookieParser from 'cookie-parser'
 import { protectedRoute } from './middlewares/auth.middleware.js'
+import cors from 'cors'
 
 const app = express()
 const PORT = process.env.PORT || 5001
@@ -15,6 +16,12 @@ const PORT = process.env.PORT || 5001
 //middlewares
 app.use(express.json())
 app.use(cookieParser())
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+  }),
+)
 
 //public routes
 app.use('/api/auth', authRoute)

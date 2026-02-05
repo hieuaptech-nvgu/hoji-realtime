@@ -9,6 +9,10 @@ class UserController {
       next(error)
     }
   }
+
+  async test(req: Request, res: Response, next: NextFunction){
+    return res.sendStatus(204)
+  }
 }
 
 export default new UserController()

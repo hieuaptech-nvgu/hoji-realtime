@@ -16,8 +16,7 @@ export const protectedRoute = async (req: Request, res: Response, next: NextFunc
     try {
       decoded = JwtUtils.verifyAccessToken(token)
     } catch (err) {
-      // Nếu token sai định dạng, hết hạn hoặc signature đểu
-      return res.status(401).json({ message: 'Invalid or expired token' })
+      return res.status(403).json({ message: 'Invalid or expired token' })
     }
 
     if (!decoded.userId) {

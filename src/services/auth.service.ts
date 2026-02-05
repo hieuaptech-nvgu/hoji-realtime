@@ -5,6 +5,7 @@ import { AppError } from '~/utils/error.js'
 import sessionService from './session.service.js'
 import { RegisterDTO, LoginDTO } from '../dtos/auth.dto.js'
 import { REFRESH_TOKEN_TTL } from '~/libs/tokens.js'
+import ms from 'ms'
 
 class AuthService {
   async register(data: RegisterDTO) {
@@ -43,10 +44,12 @@ class AuthService {
     const accessToken = await JwtUtils.createAccessToken({ userId: user._id.toString() })
     const refreshToken = await JwtUtils.createRefreshToken({ userId: user._id.toString() })
 
+    await sessionService.deleteSession(user._id.toString())
+
     await sessionService.createSession({
       userId: user._id.toString(),
       refreshToken,
-      expiredAt: new Date(Date.now() + REFRESH_TOKEN_TTL),
+      expiredAt: new Date(Date.now() + ms(REFRESH_TOKEN_TTL)),
     })
 
     return {
