@@ -10,7 +10,7 @@ class UserController {
     }
   }
 
-  async test(req: Request, res: Response, next: NextFunction){
+  async test(req: Request, res: Response, next: NextFunction) {
     return res.sendStatus(204)
   }
 }

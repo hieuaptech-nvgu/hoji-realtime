@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import { AccessTokenPayload, RefreshTokenPayload } from '~/types/jwt.type.js'
-import {ACCESS_TOKEN_TTL, REFRESH_TOKEN_TTL} from '../libs/tokens.js'
+import { ACCESS_TOKEN_TTL, REFRESH_TOKEN_TTL } from '../libs/tokens.js'
 
 class JwtUtils {
   private getAccessKey(): string {

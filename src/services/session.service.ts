@@ -3,7 +3,6 @@ import { AppError } from '~/utils/error.js'
 import JwtUtils from '../utils/jwt.js'
 import { CreateSessionDTO } from '~/types/session.type.js'
 
-
 class SessionService {
   async createSession(data: CreateSessionDTO) {
     return sessionRepository.create(data)

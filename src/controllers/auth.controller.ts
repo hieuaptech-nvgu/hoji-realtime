@@ -5,7 +5,6 @@ import sessionService from '~/services/session.service.js'
 import { REFRESH_TOKEN_TTL } from '~/libs/tokens.js'
 import ms from 'ms'
 
-
 class AuthController {
   async signUp(req: Request, res: Response, next: NextFunction) {
     try {
